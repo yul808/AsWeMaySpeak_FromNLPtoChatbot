@@ -32,8 +32,6 @@ Gutenberg texts:
 import os
 import math
 import random
-import zipfile
-import urllib.request
 import re
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -42,8 +40,6 @@ import re
 
 GLOVE_DIR        = "."                     # same directory as main.py
 GLOVE_FILE       = "wiki_giga_2024_200_MFT20_vectors_seed_2024_alpha_0.75_eta_0.05_combined.txt"
-GLOVE_DOWNLOAD   = False
-
 GUTENBERG_DIR    = "./gutenberg_texts"     # folder with all the .txt files
 NUM_TARGET_WORDS = 6                       # anchor words per game
 SENTENCES_PER_GUESS = 2                    # story sentences generated per guess
@@ -102,27 +98,6 @@ FALLBACK_SENTENCES = [
 # GLOVE LOADING
 # ──────────────────────────────────────────────────────────────────────────────
 
-def _download_glove():
-    """Download GloVe 6B 50d vectors if not present."""
-    os.makedirs(GLOVE_DIR, exist_ok=True)
-    dest = os.path.join(GLOVE_DIR, GLOVE_FILE)
-    if os.path.exists(dest):
-        return dest
-
-    zip_path = os.path.join(GLOVE_DIR, "glove.6B.zip")
-    if not os.path.exists(zip_path):
-        print("Downloading GloVe vectors (~170 MB) — this happens once …")
-        url = "https://nlp.stanford.edu/data/glove.6B.zip"
-        urllib.request.urlretrieve(url, zip_path)
-        print("Download complete.")
-
-    print("Extracting 50d vectors …")
-    with zipfile.ZipFile(zip_path, "r") as zf:
-        zf.extract(GLOVE_FILE, GLOVE_DIR)
-    print("Extraction done.")
-    return dest
-
-
 def load_glove(vocab=None):
     """
     Load GloVe embeddings into a dict  {word: [float, …]}.
@@ -131,13 +106,10 @@ def load_glove(vocab=None):
     """
     path = os.path.join(GLOVE_DIR, GLOVE_FILE)
     if not os.path.exists(path):
-        if GLOVE_DOWNLOAD:
-            path = _download_glove()
-        else:
-            raise FileNotFoundError(
-                f"GloVe file not found at {path}. "
-                "Set GLOVE_DOWNLOAD=True or download manually."
-            )
+        raise FileNotFoundError(
+            f"GloVe file not found at {path}. "
+            "Please place the file in the same directory as main.py."
+        )
 
     print("Loading GloVe vectors …  THIS MIGHT TAKE A WHILE", end=" ", flush=True)
     embeddings = {}
