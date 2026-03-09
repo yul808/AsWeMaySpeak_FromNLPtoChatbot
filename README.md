@@ -18,7 +18,17 @@ The project idea is mainly based on a previous in-class assignment (see assignme
 
 ## 2. Limitations
 
+
 ## 3. The Process
+
+
+[Initial Presentation NLP.pdf](https://github.com/user-attachments/files/25851983/Initial.Presentation.NLP.pdf)
+
+<img width="634" height="334" alt="Bildschirmfoto 2026-01-29 um 11 22 42" src="https://github.com/user-attachments/assets/dbe2b7f7-7cea-445e-9c7b-8ac46f2fd648" />
+
+<img width="744" height="365" alt="Bildschirmfoto 2026-01-29 um 11 39 00" src="https://github.com/user-attachments/assets/1d40f4e5-d6b2-4ef3-b2f4-e24ee17452a2" />
+
+[Intermediate Presentation NLP .pdf](https://github.com/user-attachments/files/25851882/Intermediate.Presentation.NLP.pdf)
 
 ## 4. The Game
 
